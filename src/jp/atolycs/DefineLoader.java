@@ -51,7 +51,7 @@ public class DefineLoader {
         ResourceBundle rb = 
             ResourceBundle.getBundle(define, Locale.getDefault(), urlLoader);
         
-        log.info("Loaded Define File: " + define);
+        log.info("Loaded End user Define File: " + define);
         return rb;
     }
 

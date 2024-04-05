@@ -20,14 +20,24 @@ public class mSendTest {
 
         String Loader_FILE = _default.getString("LOAD_CONFIG");
 
-        log.info("Loading End user... : " + Loader_FILE);
-
         ResourceBundle _enduser = DefineLoader.user_load(Loader_FILE);
 
-        if (DEBUG) {
-            log.debug("Loaded End user define.");
-        }
+        MailUtil mUtil = new MailUtil(
+                _enduser.getString("MTA_SERVER"),
+                Integer.parseInt(_enduser.getString("MTA_PORT")),
+                _enduser.getString("ENVELOPE_FROM"),
+                _default.getString("DRY_RUN"),
+                _default.getString("DEFAULT_ENCODE")
+        );
 
+        mUtil.sendMail(
+            _enduser.getString("MAIL_FROM"),
+            _enduser.getString("MAIL_FROM_NAME"),
+            _enduser.getString("MAIL_TO"),
+            _enduser.getString("SUBJECT"),
+            _enduser.getString("BODY")
+
+        );
 
     }
 }
