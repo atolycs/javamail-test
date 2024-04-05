@@ -1,52 +1,34 @@
 
 package jp.atolycs;
 
-
-import java.util.Locale;
-
-// import javax.mail.Message;
-// import javax.mail.MessagingException;
-// import javax.mail.Session;
-// import javax.mail.Address;
-// import javax.mail.Transport;
-// import javax.mail.Quota.Resource;
-// import javax.mail.internet.InternetAddress;
-// import javax.mail.internet.MimeMessage;
-// import javax.mail.internet.MimeUtility;
-
-// Resouce Bundler
-// import java.util.Properties;
+import java.net.MalformedURLException;
 import java.util.ResourceBundle;
 
-// Date Formatter
-
-// import java.text.SimpleDateFormat;
-// import java.util.Date;
-import java.io.File;
-// import java.io.IOException;
-// import java.io.InputStream;
-
-// Encode exception
-// import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.nio.file.Paths;
+import jp.atolycs.DefineLoader;
+import jp.atolycs.LogUtil;
 
 public class mSendTest {
 
+    private static final boolean DEBUG = false;
+
     public static void main(String[] args) throws MalformedURLException {
 
-        File dicDir = Paths.get(".\\res").toFile();
-        URLClassLoader urlLoader = new URLClassLoader(new URL[]{
-            dicDir.toURI().toURL()
-        });
-        ResourceBundle rb = ResourceBundle.getBundle("define", Locale.getDefault(), urlLoader);
+        LogUtil log = new LogUtil();
 
-        String mFrom = rb.getString("MAIL_FROM");
+        log.info("Loading Define Bootstrapper...");
+        ResourceBundle _default = DefineLoader.gen_load("define");
 
-        System.out.println(System.getProperty("java.class.path"));
-        System.out.println(mFrom);
+        String Loader_FILE = _default.getString("LOAD_CONFIG");
+
+        log.info("Loading End user... : " + Loader_FILE);
+
+        ResourceBundle _enduser = DefineLoader.user_load(Loader_FILE);
+
+        if (DEBUG) {
+            log.debug("Loaded End user define.");
+        }
+
+
     }
 }
 
