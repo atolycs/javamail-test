@@ -61,11 +61,11 @@ public class DefineLoader {
 
         switch (System.getProperty("os.name").toLowerCase()) {
           case "linux":
-              detected_os = "./res";
+              detected_os = "./res/endusers";
               break;
 
           case "windows":
-              detected_os = ".\\res";
+              detected_os = ".\\res\\endusers";
               break;
         }
 
