@@ -11,14 +11,31 @@ import java.nio.file.Paths;
 import jp.atolycs.LogUtil;
 
 public class DefineLoader { 
-    
+     
     public static ResourceBundle gen_load(String define) throws MalformedURLException {
-        
+
         LogUtil log = new LogUtil();
 
         // Get Resource Folder path
-        File dicDir = Paths.get(".\\res").toFile();
 
+        System.out.println(System.getProperty("os.name").toLowerCase());
+
+        
+        String detected_os = null;
+
+        switch (System.getProperty("os.name").toLowerCase()) {
+          case "linux":
+              detected_os = "./res";
+              break;
+
+          case "windows":
+              detected_os = ".\\res";
+              break;
+        }
+
+
+        File dicDir = Paths.get(detected_os).toFile();
+       
         // Encode URL
         URLClassLoader urlLoader = new URLClassLoader(
             new URL[]{
@@ -39,7 +56,20 @@ public class DefineLoader {
         LogUtil log = new LogUtil();
 
         // Get Resource Folder path
-        File dicDir = Paths.get(".\\res\\endusers").toFile();
+        
+        String detected_os = null;
+
+        switch (System.getProperty("os.name").toLowerCase()) {
+          case "linux":
+              detected_os = "./res";
+              break;
+
+          case "windows":
+              detected_os = ".\\res";
+              break;
+        }
+
+        File dicDir = Paths.get(detected_os).toFile();
 
         // Encode URL
         URLClassLoader urlLoader = new URLClassLoader(
