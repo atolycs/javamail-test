@@ -12,27 +12,25 @@ import jp.atolycs.LogUtil;
 
 public class DefineLoader { 
      
+    private static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("win");
+    private static final boolean IS_MAC = System.getProperty("os.name").toLowerCase().startsWith("mac");
+    private static final boolean IS_LINUX = System.getProperty("os.name").toLowerCase().startsWith("linux");
+
     public static ResourceBundle gen_load(String define) throws MalformedURLException {
 
         LogUtil log = new LogUtil();
 
         // Get Resource Folder path
 
-        System.out.println(System.getProperty("os.name").toLowerCase());
-
+        // System.out.println(System.getProperty("os.name").toLowerCase());
         
         String detected_os = null;
-
-        switch (System.getProperty("os.name").toLowerCase()) {
-          case "linux":
-              detected_os = "./res";
-              break;
-
-          case "windows":
-              detected_os = ".\\res";
-              break;
+        
+        if (IS_WINDOWS) {
+            detected_os = ".\\res";
+        } else if (IS_LINUX) {
+            detected_os = "./res";
         }
-
 
         File dicDir = Paths.get(detected_os).toFile();
        
@@ -59,15 +57,12 @@ public class DefineLoader {
         
         String detected_os = null;
 
-        switch (System.getProperty("os.name").toLowerCase()) {
-          case "linux":
-              detected_os = "./res/endusers";
-              break;
-
-          case "windows":
-              detected_os = ".\\res\\endusers";
-              break;
+        if (IS_WINDOWS) {
+            detected_os = ".\\res\\endusers";
+        } else if (IS_LINUX) {
+            detected_os = "./res/endusers";
         }
+
 
         File dicDir = Paths.get(detected_os).toFile();
 

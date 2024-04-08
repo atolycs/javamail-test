@@ -6,12 +6,18 @@ import java.util.ResourceBundle;
 
 import jp.atolycs.DefineLoader;
 import jp.atolycs.LogUtil;
+import jp.atolycs.atolycs_utils;
+
 
 public class mSendTest {
 
     private static final boolean DEBUG = false;
 
     public static void main(String[] args) throws MalformedURLException {
+
+        atolycs_utils utils = new atolycs_utils();
+
+        utils.bootStrap();
 
         LogUtil log = new LogUtil();
 
@@ -27,7 +33,8 @@ public class mSendTest {
                 Integer.parseInt(_enduser.getString("MTA_PORT")),
                 _enduser.getString("ENVELOPE_FROM"),
                 _default.getString("DRY_RUN"),
-                _default.getString("DEFAULT_ENCODE")
+                _default.getString("DEFAULT_ENCODE"),
+                Integer.parseInt(_default.getString("SEND_TIMEOUT"))
         );
 
         mUtil.sendMail(

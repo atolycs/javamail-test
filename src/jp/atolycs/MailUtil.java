@@ -7,6 +7,8 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
+import java.util.concurrent.TimeUnit;
+
 
 // Original Library
 import jp.atolycs.LogUtil;
@@ -24,6 +26,7 @@ public class MailUtil {
     private Properties mail_setting = new Properties();
     private LogUtil log = new LogUtil();
     private String mail_encode;
+    private Integer sendTimeOut;
     private static Boolean dry_run = true;
 
     MailUtil(
@@ -31,13 +34,15 @@ public class MailUtil {
         Integer mail_port,
         String envelope_from,
         String run_mode,
-        String encoding
+        String encoding,
+        Integer timeout
     ) {
         mail_setting.put("mail.smtp.host", mail_server);
         mail_setting.put("mail.smtp.port", mail_port);
         mail_setting.put("mail.smtp.from", envelope_from);
         dry_run = Boolean.parseBoolean(run_mode);
         mail_encode = encoding;
+        sendTimeOut = timeout;
     }
 
     void sendMail(
@@ -85,12 +90,16 @@ public class MailUtil {
 
             System.out.println();
 
+
             if (dry_run) {
                 log.info("Program is Dry Run Mode.");
                 log.info("See you.");
                 System.exit(0);
             } else {
-                log.info("Sending Mail To ");
+                log.info("Sending in " + sendTimeOut + " seconds");
+                TimeUnit.SECONDS.sleep(sendTimeOut);
+                log.info("Sending Mail To " + mail_to);
+                
             }
         
 
