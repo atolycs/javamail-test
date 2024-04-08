@@ -23,3 +23,23 @@ $ java -cp "../lib/mail.jar;." jp.atolycs.mSendTest
 
 ```
 
+
+## Move dist classpath
+```shell
+
+# Linux/macOS
+
+$ mkdir -p ./dist/jp/atolycs
+$ ./build.sh
+$ cp src/jp/atolycs/*.class ./dist/jp/atolycs
+$ cp -r src/res ./dist
+
+
+# Windows
+
+$ mkdir ./dist/jp/atolycs
+$ .\build.bat
+$ copy src/jp/atolycs/*.class ./dist/jp/atolycs
+$ copy src/res ./dist
+
+```
