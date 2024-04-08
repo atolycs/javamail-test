@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
@@ -99,7 +100,7 @@ public class MailUtil {
                 log.info("Sending in " + sendTimeOut + " seconds");
                 TimeUnit.SECONDS.sleep(sendTimeOut);
                 log.info("Sending Mail To " + mail_to);
-                
+                Transport.send(mms);
             }
         
 
