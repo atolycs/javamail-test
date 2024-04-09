@@ -24,18 +24,23 @@ jobs:
                 javac -version
 
                 # Make Dist Folder
-                mkdir -p ./dist/jp/atolycs
+                mkdir -p ./dist/dist/jp/atolycs
                 
 
                 cd ./src
                 javac -cp "../lib/mail.jar:." jp/atolycs/mSendTest.java
 
                 # Copy class file
-                cp ./jp/atolycs/*.class ../dist/jp/atolycs
+                cp ./jp/atolycs/*.class ../dist/dist/jp/atolycs
 
                 # Copy resource file
 
-                cp -r ./res ../dist/
+                cp -r ./res ../dist/dist
+
+                # Readme copy
+                
+                cp ../README.md ../dist
+                
 
             - name: Upload Artifacts
               uses: actions/upload-artifact@v4
