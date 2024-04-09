@@ -1,0 +1,45 @@
+name: Build
+
+on: 
+   workflow_dispatch
+
+
+jobs:
+    build:
+        name: Build JavaMail Test App
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Setup Java
+              uses: actions/setup-java@v4
+              with:
+                distribution: 'corretto'
+                java-version: '8'
+            
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Build
+              run: | 
+                java -version
+                javac -version
+
+                # Make Dist Folder
+                mkdir -p ./dist/jp/atolycs
+                
+
+                cd ./src
+                javac -cp "../lib/mail.jar:." jp/atolycs/mSendTest.java
+
+                # Copy class file
+                cp ./jp/atolycs/*.class ../dist/jp/atolycs
+
+                # Copy resource file
+
+                cp -r ./res ../dist/
+
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: javamail-test
+                path: ./dist
+            
